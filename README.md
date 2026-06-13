@@ -72,3 +72,9 @@ Rol completo: 12345678-5
   Ingrese la cantidad de subintervalos: 100
 
   Resultado aproximado: 333.35
+
+
+# Declaración de autoría
+
+El contenido de este repositorio fue desarrollado de forma personal por su autor.  
+No se utilizó ninguna herramienta de inteligencia artificial para la generación del código, documentación o cualquier otro entregable incluido en este proyecto.
