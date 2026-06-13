@@ -1,4 +1,4 @@
- This in gonna blow up
+ This is gonna blow up everything 
 
 me piro vampiro 
 
