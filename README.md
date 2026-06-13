@@ -2,6 +2,8 @@
 
 me piro vampiro 
 
+<img width="822" height="655" alt="image" src="https://github.com/user-attachments/assets/2360109a-28d4-4716-bcd3-5feeab64c075" />
+
  
 ## CW07 - Digito verificador de rol UTFSM
 
