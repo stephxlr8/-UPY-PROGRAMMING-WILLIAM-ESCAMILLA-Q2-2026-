@@ -28,5 +28,46 @@ El digito verificador es: 5
 Rol completo: 12345678-5
 ```
 
-Si quieres cambiar algo (quitar el "me bre, escribir con tildes, etc.), dime y
-lo edito y subo con otro commit.
+# CW08 - Numerical Integration
+
+  Se agrego la carpeta `CW08` con el programa `numerical_integration.py`, el pseudocodigo `PPP.txt` y el
+  diagrama de flujo `Flowchart.png`.
+
+  El programa calcula aproximaciones de integrales definidas usando metodos numericos.
+
+  Archivos incluidos:
+
+  1. `PPP.txt`
+     Contiene el pseudocodigo completo siguiendo las reglas de clase:
+     - Ingles simple.
+     - Usa `<-` para asignaciones.
+     - Usa `#` para comentarios.
+     - No contiene sintaxis de Python.
+
+  2. `Flowchart.png`
+     Contiene el diagrama de flujo exportado como imagen.
+     El diagrama muestra:
+     - El flujo de iteracion de cada metodo.
+     - La decision entre los tres modos disponibles.
+
+  3. `numerical_integration.py`
+     Programa funcional en Python con comentarios de:
+     - `# INPUT`
+     - `# PROCESS`
+     - `# OUTPUT`
+
+  Ejemplo de uso:
+
+  ```text
+  Seleccione el metodo de integracion:
+  1. Rectangular
+  2. Trapezoidal
+  3. Simpson
+
+  Ingrese una opcion: 2
+  Ingrese el limite inferior: 0
+  Ingrese el limite superior: 10
+  Ingrese la cantidad de subintervalos: 100
+
+  Resultado aproximado: 333.35
+
