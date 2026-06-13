@@ -5,7 +5,7 @@ me piro vampiro
 <img width="822" height="655" alt="image" src="https://github.com/user-attachments/assets/2360109a-28d4-4716-bcd3-5feeab64c075" />
 
  
-## CW07 - Digito verificador de rol UTFSM
+## CW07 - Git/Github repo
 
 Se agrego la carpeta `CW07` con el programa `digito_verificador.py`, que calcula
 el digito verificador de un rol UTFSM.
@@ -72,9 +72,9 @@ Rol completo: 12345678-5
   Ingrese la cantidad de subintervalos: 100
 
   Resultado aproximado: 333.35
+  '''
 
-
-# Declaración de autoría
+## Declaración de autoría
 
 El contenido de este repositorio fue desarrollado de forma personal por su autor.  
 No se utilizó ninguna herramienta de inteligencia artificial para la generación del código, documentación o cualquier otro entregable incluido en este proyecto.
