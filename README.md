@@ -29,6 +29,3 @@ Ingrese el rol sin guion ni digito verificador: 12345678
 El digito verificador es: 5
 Rol completo: 12345678-5
 ```
-
-Si quieres cambiar algo (quitar el "me bre, escribir con tildes, etc.), dime y
-lo edito y subo con otro commit.
