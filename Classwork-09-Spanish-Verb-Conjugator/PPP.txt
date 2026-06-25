@@ -1,0 +1,44 @@
+#-Spanish Verb Conjugator
+
+
+Start
+
+#List of  pronouns
+    pronouns ← ["yo", "tu", "el", "nosotros", "vosotros", "ellos"]
+
+# Distionary of endings
+    ar_endings ← ["o", "as", "a", "amos", "ais", "an"]
+    er_endings ← ["o", "es", "e", "emos", "eis", "en"]
+    ir_endings ← ["o", "es", "e", "imos", "is", "en"]
+
+ # Ask for a verb
+    DISPLAY "Write a Spanish verb: "
+    INPUT verb
+
+ # Get the length of the verb
+    verb_length ← LENGTH OF verb
+
+ # Get the root of the verb (everything except the last 2 letters)
+    root ← SUBSTRING OF verb FROM position 1 TO position (verb_length - 2)
+
+ # Get the last 2 letters of the verb (the ending type)
+    ending_type ← SUBSTRING OF verb FROM position (verb_length - 1) TO position verb_length
+
+ # Choose the correct list of endings based on the ending type
+    IF ending_type EQUALS "ar" THEN
+        endings ← ar_endings
+    ELSE IF ending_type EQUALS "er" THEN
+        endings ← er_endings
+    ELSE IF ending_type EQUALS "ir" THEN
+        endings ← ir_endings
+    END IF
+
+  # Loop through each pronoun and print the conjugated verb
+    FOR i ← 1 TO 6
+        current_pronoun ← pronouns[i]
+        current_ending ← endings[i]
+        conjugated_verb ← root + current_ending
+        DISPLAY current_pronoun + " " + conjugated_verb
+    END FOR
+
+End
