@@ -73,8 +73,31 @@ Rol completo: 12345678-5
 
   Resultado aproximado: 333.35
   '''
+---
+# CW09 - Spanish Verb Conjugator
+
+Se agrego la carpeta `Classwork-09-Spanish-Verb-Conjugator` con el programa `Spanish_verb_conjugator.py`, que conjuga verbos regulares en español en tiempo presente.
+
+El programa pide un verbo regular en español y lo conjuga para todos los pronombres:
+
+1. Lee el verbo ingresado por el usuario.
+2. Separa la raiz de la terminacion (`-ar`, `-er`, `-ir`).
+3. Aplica las terminaciones correspondientes segun el tipo de verbo.
+4. Imprime la conjugacion completa.
+
+Ejemplo de uso:
+
+write a spanish verb: hablar
+yo hablo
+tu hablas
+el habla
+nosotros hablamos
+vosotros habláis
+ellos hablan
 
 ## Declaración de autoría
 
-El contenido de este repositorio fue desarrollado de forma personal por su autor.  
+El contenido de este repositorio fue desarrollado de forma personal por su autor.
 No se utilizó ninguna herramienta de inteligencia artificial para la generación del código, documentación o cualquier otro entregable incluido en este proyecto.
+
+---
