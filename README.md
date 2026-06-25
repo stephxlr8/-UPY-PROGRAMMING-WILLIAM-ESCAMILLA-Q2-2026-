@@ -1,4 +1,4 @@
- This is gonna blow up everything 
+This is gonna blow up everything 
 
 me piro vampiro 
 
@@ -72,11 +72,11 @@ Rol completo: 12345678-5
   Ingrese la cantidad de subintervalos: 100
 
   Resultado aproximado: 333.35
-  '''
+  ```
 ---
 # CW09 - Spanish Verb Conjugator
 
-Se agrego la carpeta `Classwork-09-Spanish-Verb-Conjugator` con el programa `Spanish_verb_conjugator.py`, que conjuga verbos regulares en español en tiempo presente.
+Se agrego la carpeta `Classwork-09-Spanish-Verb-Conjugator` con el programa `Spanish_verb_conjugator.py`, el pseudocodigo `PPP.txt` y el diagrama de flujo correspondiente, que conjuga verbos regulares en español en tiempo presente.
 
 El programa pide un verbo regular en español y lo conjuga para todos los pronombres:
 
@@ -85,15 +85,34 @@ El programa pide un verbo regular en español y lo conjuga para todos los pronom
 3. Aplica las terminaciones correspondientes segun el tipo de verbo.
 4. Imprime la conjugacion completa.
 
+Archivos incluidos:
+
+1. `Spanish_verb_conjugator.py`
+   Programa funcional en Python que realiza la conjugacion.
+
+2. `PPP.txt`
+   Contiene el pseudocodigo completo siguiendo las reglas de clase:
+   - Ingles simple.
+   - Usa `<-` para asignaciones.
+   - Usa `#` para comentarios.
+   - No contiene sintaxis de Python.
+
+3. `Flowchart`
+   Diagrama de flujo que muestra la logica del programa: lectura del verbo,
+   separacion de raiz y terminacion, seleccion del tipo de terminacion segun
+   `-ar`, `-er` o `-ir`, y el ciclo de impresion para cada pronombre.
+
 Ejemplo de uso:
 
+```text
 write a spanish verb: hablar
 yo hablo
 tu hablas
 el habla
 nosotros hablamos
-vosotros habláis
+vosotros hablais
 ellos hablan
+```
 
 ## Declaración de autoría
 
