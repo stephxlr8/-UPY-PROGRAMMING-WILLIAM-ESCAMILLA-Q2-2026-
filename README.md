@@ -113,63 +113,44 @@ nosotros hablamos
 vosotros hablais
 ellos hablan
 ```
-Classwork #10 — School Management System
+---
+# CW10 - School Management System
+Se agrego la carpeta `Classwork-10-School-Management-System` con el programa `classwork10.py`, el pseudocodigo `PPP.txt` y el diagrama de flujo correspondiente, que simula un sistema de gestion escolar con login y tres roles distintos.
+El programa pide un usuario y contraseña, valida el acceso y muestra un menu distinto segun el rol:
+1. Lee el usuario y la contraseña ingresados.
+2. Valida las credenciales contra la lista de usuarios registrados.
+3. Identifica el rol del usuario (alumno, maestro o coordinador).
+4. Muestra el menu correspondiente a su rol.
+5. Ejecuta la accion segun el rol: consultar boleta, calificar alumnos o ver listas generales.
+Archivos incluidos:
+1. `classwork10.py`
+   Programa funcional en Python que implementa el sistema de gestion escolar.
+2. `PPP.txt`
+   Contiene el pseudocodigo completo siguiendo las reglas de clase:
+   - Ingles simple.
+   - Usa `<-` para asignaciones.
+   - Usa `#` para comentarios.
+   - No contiene sintaxis de Python.
+3. `Flowchart`
+   Diagrama de flujo que muestra la logica del programa: validacion del login,
+   seleccion de rol, y los tres caminos posibles (boleta del alumno, captura
+   de calificaciones del maestro, y listas generales del coordinador).
+Ejemplo de uso:
+```text
+Usuario: jperez
+Contrasena: 1234
 
-Sistema de gestión escolar hecho en Python puro (sin librerías externas) para la materia de Programación, TSU en Ciencia de Datos — UPY.
+Bienvenido, Juan Perez (alumno)
 
-Descripción
+Boleta de Juan Perez
+Matematicas: 8.5
+Programacion: 9.0
+Ingles: 7.5
 
-Programa de consola que simula un sistema escolar con login y tres roles distintos: alumno, maestro y coordinador. Cada rol tiene su propio menú y permisos.
+Materias aprobadas: {'Matematicas', 'Programacion'}
+Materias pendientes: {'Ingles'}
 
-Restricción de la consigna: solo se permiten los built-ins input, print, while e if/elif/else. Sin funciones (def) ni librerías externas.
-
-Estructuras usadas
-
-EstructuraUso en el programaDiccionariousuarios (datos de login y rol), calificaciones (notas por alumno y materia)Tuplamaterias (lista fija de materias)Setaprobadas / pendientes (materias aprobadas vs. pendientes del alumno)
-
-Roles y funcionalidad
-
-Alumno
-
-
-Ve su boleta de calificaciones (Matemáticas, Programación, Inglés).
-El programa calcula automáticamente qué materias aprobó (≥ 8.0) y cuáles tiene pendientes.
-
-
-Maestro
-
-
-Ve la lista completa de alumnos.
-Puede capturar/actualizar la calificación de un alumno en una materia específica.
-Puede calificar a varios alumnos en la misma sesión.
-
-
-Coordinador
-
-
-Ve la lista de maestros.
-Ve la lista de materias.
-Ve la lista completa de alumnos con todas sus calificaciones.
-
-
-Usuarios de prueba
-
-UsuarioContraseñaRoljperez1234alumnoamartin1234alumnocsilva1234alumnolhdez1234alumnodgomez1234alumnofcruz1234alumnomlopez1234maestrorgarcia1234coordinador
-
-Cómo correrlo
-
-bashpython classwork10.py
-
-Al iniciar, te pedirá usuario y contraseña. Usa cualquiera de la tabla de arriba para probar los distintos roles.
-
-Estructura del repo
-
-.
-├── classwork10.py     # Código principal
-├── PPP.txt             # Pseudocódigo (formato PPP, en inglés)
-├── diagrama.mmd        # Diagrama de flujo en Mermaid
-└── README.md
-
+```
 
 ## Declaración de autoría
 
