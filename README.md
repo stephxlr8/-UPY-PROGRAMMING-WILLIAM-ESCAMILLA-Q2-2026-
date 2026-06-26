@@ -113,6 +113,63 @@ nosotros hablamos
 vosotros hablais
 ellos hablan
 ```
+Classwork #10 — School Management System
+
+Sistema de gestión escolar hecho en Python puro (sin librerías externas) para la materia de Programación, TSU en Ciencia de Datos — UPY.
+
+Descripción
+
+Programa de consola que simula un sistema escolar con login y tres roles distintos: alumno, maestro y coordinador. Cada rol tiene su propio menú y permisos.
+
+Restricción de la consigna: solo se permiten los built-ins input, print, while e if/elif/else. Sin funciones (def) ni librerías externas.
+
+Estructuras usadas
+
+EstructuraUso en el programaDiccionariousuarios (datos de login y rol), calificaciones (notas por alumno y materia)Tuplamaterias (lista fija de materias)Setaprobadas / pendientes (materias aprobadas vs. pendientes del alumno)
+
+Roles y funcionalidad
+
+Alumno
+
+
+Ve su boleta de calificaciones (Matemáticas, Programación, Inglés).
+El programa calcula automáticamente qué materias aprobó (≥ 8.0) y cuáles tiene pendientes.
+
+
+Maestro
+
+
+Ve la lista completa de alumnos.
+Puede capturar/actualizar la calificación de un alumno en una materia específica.
+Puede calificar a varios alumnos en la misma sesión.
+
+
+Coordinador
+
+
+Ve la lista de maestros.
+Ve la lista de materias.
+Ve la lista completa de alumnos con todas sus calificaciones.
+
+
+Usuarios de prueba
+
+UsuarioContraseñaRoljperez1234alumnoamartin1234alumnocsilva1234alumnolhdez1234alumnodgomez1234alumnofcruz1234alumnomlopez1234maestrorgarcia1234coordinador
+
+Cómo correrlo
+
+bashpython classwork10.py
+
+Al iniciar, te pedirá usuario y contraseña. Usa cualquiera de la tabla de arriba para probar los distintos roles.
+
+Estructura del repo
+
+.
+├── classwork10.py     # Código principal
+├── PPP.txt             # Pseudocódigo (formato PPP, en inglés)
+├── diagrama.mmd        # Diagrama de flujo en Mermaid
+└── README.md
+
 
 ## Declaración de autoría
 
