@@ -1,0 +1,159 @@
+# ============================================================
+# CLASSWORK #10 - SCHOOL MANAGEMENT SYSTEM
+# Pseudocode (PPP)
+# ============================================================
+
+BEGIN
+
+    # -----------------------------------------------------------
+    # DATA
+    # -----------------------------------------------------------
+    users ← {
+        "jperez"  -> { password: "1234", role: "student",     name: "Juan Perez" },
+        "amartin" -> { password: "1234", role: "student",     name: "Ana Martin" },
+        "csilva"  -> { password: "1234", role: "student",     name: "Carlos Silva" },
+        "lhdez"   -> { password: "1234", role: "student",     name: "Laura Hernandez" },
+        "dgomez"  -> { password: "1234", role: "student",     name: "Diego Gomez" },
+        "fcruz"   -> { password: "1234", role: "student",     name: "Fernanda Cruz" },
+        "mlopez"  -> { password: "1234", role: "teacher",     name: "Maria Lopez" },
+        "rgarcia" -> { password: "1234", role: "coordinator", name: "Rosa Garcia" }
+    }
+
+    # subjects is a fixed list (tuple) of subject names
+    subjects ← ( "Mathematics", "Programming", "English" )
+
+    # grades is a dictionary: username -> subject -> grade
+    grades ← {
+        "jperez"  -> { Mathematics: 8.5, Programming: 9.0, English: 7.5 },
+        "amartin" -> { Mathematics: 9.0, Programming: 8.0, English: 8.5 },
+        "csilva"  -> { Mathematics: 6.5, Programming: 7.0, English: 8.0 },
+        "lhdez"   -> { Mathematics: 9.5, Programming: 9.5, English: 9.0 },
+        "dgomez"  -> { Mathematics: 7.0, Programming: 6.5, English: 7.0 },
+        "fcruz"   -> { Mathematics: 8.0, Programming: 8.5, English: 6.0 }
+    }
+
+    # -----------------------------------------------------------
+    # LOGIN
+    # -----------------------------------------------------------
+    accessGranted ← FALSE
+
+    WHILE accessGranted = FALSE DO
+
+        DISPLAY "Username: "
+        READ username
+
+        DISPLAY "Password: "
+        READ password
+
+        IF username EXISTS IN users AND users[username].password = password THEN
+            accessGranted ← TRUE
+        ELSE
+            DISPLAY "Incorrect username or password. Try again."
+            DISPLAY ""
+        END IF
+
+    END WHILE
+
+    role ← users[username].role
+    name ← users[username].name
+
+    DISPLAY ""
+    DISPLAY "Welcome, " + name + " (" + role + ")"
+    DISPLAY ""
+
+    # -----------------------------------------------------------
+    # MENU BY ROLE
+    # -----------------------------------------------------------
+    IF role = "student" THEN
+
+        DISPLAY "Report card for " + name
+
+        approved ← EMPTY SET
+
+        FOR EACH subject IN subjects DO
+            grade ← grades[username][subject]
+            DISPLAY subject + ": " + grade
+            IF grade >= 8.0 THEN
+                ADD subject TO approved
+            END IF
+        END FOR
+
+        pending ← (SET OF subjects) MINUS approved
+
+        DISPLAY ""
+        DISPLAY "Approved subjects: " + approved
+        DISPLAY "Pending subjects: " + pending
+
+    ELSE IF role = "teacher" THEN
+
+        DISPLAY "List of students:"
+        FOR EACH userKey IN users DO
+            IF users[userKey].role = "student" THEN
+                DISPLAY "- " + userKey + ": " + users[userKey].name
+            END IF
+        END FOR
+
+        keepGoing ← "y"
+
+        WHILE keepGoing = "y" DO
+
+            DISPLAY ""
+            DISPLAY "Student (username): "
+            READ student
+
+            WHILE student NOT EXISTS IN grades DO
+                DISPLAY "That student does not exist."
+                DISPLAY "Student (username): "
+                READ student
+            END WHILE
+
+            DISPLAY "Subject: "
+            READ subject
+
+            WHILE subject NOT IN subjects DO
+                DISPLAY "That subject does not exist."
+                DISPLAY "Subject: "
+                READ subject
+            END WHILE
+
+            DISPLAY "New grade: "
+            READ newGrade
+            CONVERT newGrade TO DECIMAL NUMBER
+
+            grades[student][subject] ← newGrade
+            DISPLAY "Grade updated."
+
+            DISPLAY ""
+            DISPLAY "Grade another student? (y/n): "
+            READ keepGoing
+
+        END WHILE
+
+    ELSE IF role = "coordinator" THEN
+
+        DISPLAY "List of teachers:"
+        FOR EACH userKey IN users DO
+            IF users[userKey].role = "teacher" THEN
+                DISPLAY "- " + userKey + ": " + users[userKey].name
+            END IF
+        END FOR
+
+        DISPLAY ""
+        DISPLAY "List of subjects:"
+        FOR EACH subject IN subjects DO
+            DISPLAY "- " + subject
+        END FOR
+
+        DISPLAY ""
+        DISPLAY "List of students with their grades:"
+        FOR EACH student IN grades DO
+            DISPLAY ""
+            DISPLAY users[student].name + " (" + student + "):"
+            FOR EACH subject IN subjects DO
+                DISPLAY "  " + subject + ": " + grades[student][subject]
+            END FOR
+        END FOR
+
+    END IF
+
+END
