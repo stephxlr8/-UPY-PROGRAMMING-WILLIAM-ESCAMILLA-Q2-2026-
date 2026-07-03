@@ -1,0 +1,81 @@
+====================================================
+PPP - Program Pseudocode
+Classwork #11 - The Mandelbrot Set
+====================================================
+
+BEGIN MandelbrotSet
+
+    # -------------------------------------------------
+    # STEP 1: Read the configuration file
+    # -------------------------------------------------
+    CREATE empty dictionary config
+
+    OPEN file "config.txt" for reading AS archivo
+
+    FOR EACH linea IN archivo
+        REMOVE leading and trailing spaces from linea
+        SPLIT linea INTO clave AND valor USING "="
+        config[clave] ← CONVERT valor TO real number
+    ENDFOR
+
+    CLOSE archivo
+
+    # -------------------------------------------------
+    # STEP 2: Extract the grid parameters from config
+    # -------------------------------------------------
+    ancho ← CONVERT config["ancho"] TO integer number
+    alto ← CONVERT config["alto"] TO integer number
+    real_min ← config["real_min"]
+    real_max ← config["real_max"]
+    imag_min ← config["imag_min"]
+    imag_max ← config["imag_max"]
+    max_iter ← CONVERT config["max_iter"] TO integer number
+
+    # -------------------------------------------------
+    # STEP 3: Prepare the output file
+    # -------------------------------------------------
+    OPEN file "mandelbrot.csv" for writing AS salida
+    WRITE "fila,columna,iteraciones" TO salida
+
+    # -------------------------------------------------
+    # STEP 4: Sweep every point of the grid (outer loops)
+    # -------------------------------------------------
+    FOR fila ← 0 TO alto - 1
+
+        FOR columna ← 0 TO ancho - 1
+
+            # ---------------------------------------------
+            # STEP 5: Map the pixel (fila, columna) to a
+            #         point c on the complex plane
+            # ---------------------------------------------
+            real ← real_min + (columna / ancho) * (real_max - real_min)
+            imag ← imag_min + (fila / alto) * (imag_max - imag_min)
+            c ← COMPLEX NUMBER made of (real, imag)
+
+            # ---------------------------------------------
+            # STEP 6: Iterate z ← z*z + c and count how many
+            #         iterations it takes to escape
+            # ---------------------------------------------
+            z ← COMPLEX NUMBER made of (0, 0)
+            iteraciones ← 0
+
+            WHILE MAGNITUDE(z) <= 2 AND iteraciones < max_iter
+                z ← z * z + c
+                iteraciones ← iteraciones + 1
+            ENDWHILE
+
+            # ---------------------------------------------
+            # STEP 7: Save this point's result as a CSV row
+            # ---------------------------------------------
+            WRITE fila, columna, iteraciones TO salida
+
+        ENDFOR
+
+    ENDFOR
+
+    # -------------------------------------------------
+    # STEP 8: Close the output file
+    # -------------------------------------------------
+    CLOSE salida
+
+END MandelbrotSet
