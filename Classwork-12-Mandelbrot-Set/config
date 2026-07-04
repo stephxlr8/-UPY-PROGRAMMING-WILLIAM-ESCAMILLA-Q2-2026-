@@ -1,0 +1,7 @@
+ancho=400
+alto=400
+real_min=-0.80
+real_max=-0.70
+imag_min=0.05
+imag_max=0.15
+max_iter=300
