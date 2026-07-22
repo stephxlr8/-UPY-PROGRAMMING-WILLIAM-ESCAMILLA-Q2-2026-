@@ -1,0 +1,78 @@
+flowchart TD
+
+    subgraph MAIN["PROGRAMA PRINCIPAL"]
+        M1([INICIO]) --> M2["INPUT: numbers ← 10 enteros aleatorios de 0 a 100"]
+        M2 --> M3[/"OUTPUT: escribir 'Antes: numbers'"/]
+        M3 --> M4["PROCESS: llamar insertion_sort_animated con numbers"]
+        M4 --> M5[/"OUTPUT: escribir 'Despues: numbers'"/]
+        M5 --> M6([FIN])
+    end
+
+    subgraph DRAW["draw_bars - numbers, selected, sorted_until"]
+        D1([INICIO draw_bars]) --> D2["limpiar lienzo<br/>n ← cantidad de numbers<br/>bar_width ← 10.0 / n"]
+        D2 --> D3{"i FROM 0 TO n-1"}
+        D3 -->|no quedan| D9([FIN draw_bars])
+        D3 -->|si| D4["number ← numbers de i<br/>x ← i * bar_width + bar_width/2"]
+        D4 --> D5{"i esta en selected?"}
+        D5 -->|si| D6["color ← ROJO"]
+        D5 -->|no| D7{"i menor o igual a sorted_until?"}
+        D7 -->|si| D7a["color ← VERDE"]
+        D7 -->|no| D7b["color ← AZUL"]
+        D6 --> D8["dibujar rectangulo relleno<br/>alto = number, ancho = bar_width * 0.9"]
+        D7a --> D8
+        D7b --> D8
+        D8 --> D8b["mostrar lienzo y esperar 300 ms"]
+        D8b --> D3
+    end
+
+    subgraph BUB["bubble_sort_animated - numbers"]
+        B1([INICIO bubble]) --> B2["setup_canvas<br/>n ← cantidad de numbers"]
+        B2 --> B3{"sweep FROM 0 TO n-1"}
+        B3 -->|no quedan| B8["draw_bars final"]
+        B3 -->|si| B4{"pair FROM 0 TO n-2-sweep"}
+        B4 -->|no quedan| B3
+        B4 -->|si| B5["draw_bars con selected = pair, pair+1"]
+        B5 --> B6{"numbers de pair mayor que numbers de pair+1?"}
+        B6 -->|si| B7["intercambiar numbers de pair y pair+1<br/>draw_bars"]
+        B6 -->|no| B4
+        B7 --> B4
+        B8 --> B9([FIN bubble])
+    end
+
+    subgraph SEL["selection_sort_animated - numbers"]
+        S1([INICIO selection]) --> S2["setup_canvas<br/>n ← cantidad de numbers"]
+        S2 --> S3{"i FROM 0 TO n-1"}
+        S3 -->|no quedan| S9["draw_bars con sorted_until = n-1"]
+        S3 -->|si| S4["min_index ← i"]
+        S4 --> S5{"j FROM i+1 TO n-1"}
+        S5 -->|si| S6["draw_bars con selected = min_index, j"]
+        S6 --> S7{"numbers de j menor que numbers de min_index?"}
+        S7 -->|si| S7a["min_index ← j"]
+        S7 -->|no| S5
+        S7a --> S5
+        S5 -->|no quedan| S8{"min_index distinto de i?"}
+        S8 -->|si| S8a["intercambiar numbers de i y min_index<br/>draw_bars"]
+        S8 -->|no| S3
+        S8a --> S3
+        S9 --> S10([FIN selection])
+    end
+
+    subgraph INS["insertion_sort_animated - numbers"]
+        I1([INICIO insertion]) --> I2["setup_canvas<br/>n ← cantidad de numbers"]
+        I2 --> I3{"i FROM 1 TO n-1"}
+        I3 -->|no quedan| I9["draw_bars con sorted_until = n-1"]
+        I3 -->|si| I4["key ← numbers de i<br/>j ← i - 1<br/>draw_bars con selected = i"]
+        I4 --> I5{"j mayor o igual a 0 Y numbers de j mayor que key?"}
+        I5 -->|si| I6["numbers de j+1 ← numbers de j<br/>j ← j - 1<br/>draw_bars"]
+        I6 --> I5
+        I5 -->|no| I7["numbers de j+1 ← key<br/>draw_bars con sorted_until = i"]
+        I7 --> I3
+        I9 --> I10([FIN insertion])
+    end
+
+    M4 -.llama.-> I1
+    I4 -.llama.-> D1
+    I6 -.llama.-> D1
+    I7 -.llama.-> D1
+    B5 -.llama.-> D1
+    S6 -.llama.-> D1

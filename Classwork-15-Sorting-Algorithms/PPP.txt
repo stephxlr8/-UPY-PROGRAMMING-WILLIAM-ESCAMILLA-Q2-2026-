@@ -1,0 +1,211 @@
+============================================================
+PPP - PSEUDOCODIGO
+Programa: sorting_visual.py
+Visualizacion animada de algoritmos de ordenamiento (stddraw)
+============================================================
+
+# Convenciones:
+#   ←   asignacion
+#   #   comentario
+#   {}  conjunto de indices
+
+
+# ------------------------------------------------------------
+# PROCEDIMIENTO: setup_canvas
+# Ajusta la escala del lienzo al tamano de los datos
+# ------------------------------------------------------------
+BEGIN setup_canvas(numbers)
+    SET escala X FROM -0.1 TO 10
+    SET escala Y FROM -0.5 TO (mayor valor de numbers) + 1
+END setup_canvas
+
+
+# ------------------------------------------------------------
+# PROCEDIMIENTO: draw_bars
+# Dibuja el arreglo como barras de colores
+#   rojo  = elementos que se estan comparando
+#   verde = zona ya ordenada
+#   azul  = zona pendiente
+# ------------------------------------------------------------
+BEGIN draw_bars(numbers, selected, sorted_until)
+    LIMPIAR el lienzo
+    n ← cantidad de elementos de numbers
+    bar_width ← 10.0 / n
+
+    FOR i FROM 0 TO n - 1
+        number ← numbers[i]
+        x ← i * bar_width + bar_width / 2
+
+        IF i pertenece a selected THEN
+            color ← ROJO
+        ELSE
+            IF i <= sorted_until THEN
+                color ← VERDE
+            ELSE
+                color ← AZUL
+            ENDIF
+        ENDIF
+
+        FIJAR color del lapiz A color
+        DIBUJAR rectangulo relleno en (x - bar_width/2, 0)
+                de ancho bar_width * 0.9 y de alto number
+    ENDFOR
+
+    MOSTRAR el lienzo Y ESPERAR 300 milisegundos
+END draw_bars
+
+
+# ------------------------------------------------------------
+# PROCEDIMIENTO: bubble_sort
+# Compara vecinos e intercambia; el mayor "burbujea" al final
+# ------------------------------------------------------------
+BEGIN bubble_sort(numbers)
+    n ← cantidad de elementos de numbers
+    FOR sweep FROM 0 TO n - 1
+        FOR pair FROM 0 TO n - 2 - sweep
+            IF numbers[pair] > numbers[pair + 1] THEN
+                INTERCAMBIAR numbers[pair] CON numbers[pair + 1]
+            ENDIF
+        ENDFOR
+    ENDFOR
+END bubble_sort
+
+
+# ------------------------------------------------------------
+# PROCEDIMIENTO: bubble_sort_animated
+# ------------------------------------------------------------
+BEGIN bubble_sort_animated(numbers)
+    LLAMAR setup_canvas(numbers)
+    n ← cantidad de elementos de numbers
+
+    FOR sweep FROM 0 TO n - 1
+        FOR pair FROM 0 TO n - 2 - sweep
+            LLAMAR draw_bars(numbers, selected ← {pair, pair + 1})
+            IF numbers[pair] > numbers[pair + 1] THEN
+                INTERCAMBIAR numbers[pair] CON numbers[pair + 1]
+                LLAMAR draw_bars(numbers, selected ← {pair, pair + 1})
+            ENDIF
+        ENDFOR
+    ENDFOR
+
+    LLAMAR draw_bars(numbers)
+    MOSTRAR el lienzo final
+END bubble_sort_animated
+
+
+# ------------------------------------------------------------
+# PROCEDIMIENTO: selection_sort
+# Busca el minimo de la parte no ordenada y lo manda al frente
+# ------------------------------------------------------------
+BEGIN selection_sort(numbers)
+    n ← cantidad de elementos de numbers
+    FOR i FROM 0 TO n - 1
+        # suponemos que el minimo esta en la posicion i
+        min_index ← i
+        FOR j FROM i + 1 TO n - 1
+            IF numbers[j] < numbers[min_index] THEN
+                min_index ← j
+            ENDIF
+        ENDFOR
+        INTERCAMBIAR numbers[i] CON numbers[min_index]
+    ENDFOR
+END selection_sort
+
+
+# ------------------------------------------------------------
+# PROCEDIMIENTO: selection_sort_animated
+# ------------------------------------------------------------
+BEGIN selection_sort_animated(numbers)
+    LLAMAR setup_canvas(numbers)
+    n ← cantidad de elementos de numbers
+
+    FOR i FROM 0 TO n - 1
+        min_index ← i
+        FOR j FROM i + 1 TO n - 1
+            LLAMAR draw_bars(numbers, selected ← {min_index, j},
+                             sorted_until ← i - 1)
+            IF numbers[j] < numbers[min_index] THEN
+                min_index ← j
+            ENDIF
+        ENDFOR
+
+        IF min_index ≠ i THEN
+            INTERCAMBIAR numbers[i] CON numbers[min_index]
+            LLAMAR draw_bars(numbers, selected ← {i, min_index},
+                             sorted_until ← i - 1)
+        ENDIF
+    ENDFOR
+
+    LLAMAR draw_bars(numbers, sorted_until ← n - 1)
+    MOSTRAR el lienzo final
+END selection_sort_animated
+
+
+# ------------------------------------------------------------
+# PROCEDIMIENTO: insertion_sort
+# Toma cada elemento y lo inserta en su lugar dentro
+# de la parte ya ordenada, recorriendo los mayores a la derecha
+# ------------------------------------------------------------
+BEGIN insertion_sort(numbers)
+    n ← cantidad de elementos de numbers
+    FOR i FROM 1 TO n - 1
+        key ← numbers[i]
+        j ← i - 1
+        WHILE j >= 0 AND numbers[j] > key
+            numbers[j + 1] ← numbers[j]
+            j ← j - 1
+        ENDWHILE
+        numbers[j + 1] ← key
+    ENDFOR
+END insertion_sort
+
+
+# ------------------------------------------------------------
+# PROCEDIMIENTO: insertion_sort_animated
+# ------------------------------------------------------------
+BEGIN insertion_sort_animated(numbers)
+    LLAMAR setup_canvas(numbers)
+    n ← cantidad de elementos de numbers
+
+    FOR i FROM 1 TO n - 1
+        key ← numbers[i]
+        j ← i - 1
+        LLAMAR draw_bars(numbers, selected ← {i}, sorted_until ← i - 1)
+
+        WHILE j >= 0 AND numbers[j] > key
+            numbers[j + 1] ← numbers[j]
+            j ← j - 1
+            LLAMAR draw_bars(numbers, selected ← {j + 1},
+                             sorted_until ← i - 1)
+        ENDWHILE
+
+        numbers[j + 1] ← key
+        LLAMAR draw_bars(numbers, selected ← {j + 1}, sorted_until ← i)
+    ENDFOR
+
+    LLAMAR draw_bars(numbers, sorted_until ← n - 1)
+    MOSTRAR el lienzo final
+END insertion_sort_animated
+
+
+# ------------------------------------------------------------
+# PROGRAMA PRINCIPAL
+# ------------------------------------------------------------
+BEGIN main
+
+    # ---------------- INPUT ----------------
+    numbers ← lista de 10 numeros enteros aleatorios entre 0 y 100
+
+    # ---------------- OUTPUT ---------------
+    ESCRIBIR "Antes: ", numbers
+
+    # ---------------- PROCESS --------------
+    # se ejecuta solo UN algoritmo a la vez
+    LLAMAR insertion_sort_animated(numbers)
+    # LLAMAR bubble_sort_animated(numbers)
+    # LLAMAR selection_sort_animated(numbers)
+
+    # ---------------- OUTPUT ---------------
+    ESCRIBIR "Despues: ", numbers
+
+END main
